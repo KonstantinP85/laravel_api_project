@@ -21,6 +21,7 @@ class OrderResource extends JsonResource
             'status' => $this->status,
             'product' => $this->product,
             'client' => $this->client,
+            'history' => $this->orderHistory,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

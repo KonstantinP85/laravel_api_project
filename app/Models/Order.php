@@ -20,4 +20,9 @@ class Order extends Model
     {
         return $this->belongsto(Client::class);
     }
+
+    public function orderHistory()
+    {
+        return $this->hasMany(OrderHistory::class);
+    }
 }

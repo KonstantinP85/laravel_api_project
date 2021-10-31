@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\OrderEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\IndexRequest;
 use App\Http\Requests\Order\StoreRequest;
@@ -78,6 +79,7 @@ class OrderController extends Controller
             'client_id' => $inputData['client_id'],
             'product_id' => $inputData['product_id'],
         ]);
+        event(new OrderEvent($order));
 
         return response(new OrderResource($order), Response::HTTP_CREATED);
     }
@@ -94,6 +96,7 @@ class OrderController extends Controller
     {
         $order = Order::query()->findOrFail($id);
         $order->update($request->validated());
+        event(new OrderEvent($order));
 
         return response(new OrderResource($order), Response::HTTP_OK);
     }
